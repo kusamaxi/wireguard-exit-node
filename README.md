@@ -17,7 +17,22 @@ systems are total silos for only in reach of technically talented people and wil
 lead to just another possibly even worse system over time due to inequality.
 
 
-## Usage
+## Install
 original wireguard scripts are deprecated and we chose to use
 [innernet](https://github.com/tonarino/innernet) for VPN management.  
 dl chmod and execute ./innernet-install.sh
+
+for arch
+```
+git clone https://github.com/kusamaxi/wireguard-exit-node && chmod +x wireguard-exit-node/innernet-install-arch.sh && sudo ./wireguard-exit-node/innernet-install-arch.sh
+```
+
+for others
+```
+git clone https://github.com/kusamaxi/wireguard-exit-node && chmod +x wireguard-exit-node/innernet-install-cargo.sh && sudo ./wireguard-exit-node/innernet-install-cargo.sh
+```
+## Usage
+at clients
+`innernet --help`
+at server
+`innernet-server --help`
