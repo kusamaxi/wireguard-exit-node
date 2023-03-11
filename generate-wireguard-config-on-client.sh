@@ -24,18 +24,19 @@ fi
 # Set the remote server target
 remote_server=$1
 
-# Generate the WireGuard public key
-public_key=$(generate_wireguard_key)
-
 # Get the local hostname
 hostname=$(hostname)
 
-# Upload the public key to the remote server using SCP
-scp <(echo "$public_key") "${remote_server}:/etc/wireguard/${hostname}.public"
+# Create temporary file for public key
+tmpfile=$(mktemp)
+echo "$public_key" > "$tmpfile"
 
-# Install WireGuard on the client machine
-sudo apt-get update
-sudo apt-get install -y wireguard
+# Upload the public key to the remote server using SCP
+scp "$tmpfile" "${remote_server}:/etc/wireguard/${hostname}.public"
+
+# Delete temporary file
+rm "$tmpfile"
+
 
 # Configure the client to join the private network
 sudo tee /etc/wireguard/wg0.conf > /dev/null << EOF
