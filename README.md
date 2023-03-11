@@ -1,5 +1,4 @@
-Deprecated, while installing wireguard to my machines to initiate scripts, I found much more
-robust software for the task in aur repositories. [innernet](https://github.com/tonarino/innernet)
+# Deprecated, while installing wireguard to my machines to initiate scripts, I found much more robust software for the task in aur repositories. [innernet](https://github.com/tonarino/innernet)
 
 # Generate VLAN using Wireguard
 In this repository we learn how to use scripts to set up Wireguard between private network
