@@ -35,4 +35,6 @@ git clone https://github.com/kusamaxi/wireguard-exit-node && chmod +x wireguard-
 at clients
 `innernet --help`
 at server
-`innernet-server --help`
+```bash
+innernet-server --help
+sudo innernet-server new```
