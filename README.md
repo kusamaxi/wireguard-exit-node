@@ -1,3 +1,6 @@
+Deprecated, while installing wireguard to my machines to initiate scripts, I found much more
+robust software for the task in aur repositories. [innernet](https://github.com/tonarino/innernet)
+
 # Generate VLAN using Wireguard
 In this repository we learn how to use scripts to set up Wireguard between private network
 of computers and then configure clients to reroute their SSH ports exposing them to WAN
@@ -28,7 +31,7 @@ now scripts assign ip address 10.0.0.2 for this since its last number of hostnam
 Gateway/exit nodes ip address will always be 10.0.0.1 in internal network.
 this fit for my needs, pull requests for better design are welcome.
 
-After you have installed these client side scripts you need gateway/exit node.
+After you have ins[]talled these client side scripts you need gateway/exit node.
 Purchase vm/dedicated server from cloud provider within 50ms and install gateway.sh script on it. 
 My choice for this example was linode 2vcpu dedicated server from tokyo since I don't
 like to be sharing my CPU core. 
