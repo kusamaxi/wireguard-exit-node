@@ -9,12 +9,12 @@ listen_port=51820
 # Subnet settings
 subnet_name="xi"
 subnet_cidr="10.42.1.0/24"
-subnet_nodes=("xi01" "xi02")
+subnet_nodes=("01" "02")
 
 # Homenet settings
 homenet_name="pc"
 homenet_cidr="10.42.2.0/24"
-homenet_nodes=("pc01" "pc02")
+homenet_nodes=("01" "02")
 
 # Function to create a new innernet network
 function create_network {
@@ -28,7 +28,7 @@ function create_network {
   read _
 
   # create private network
-  innernet-server new --network-name "$network_name" --network-cidr "$network_cidr" --external-endpoint "$external_endpoint" --listen-port "$listen_port"
+  innernet-server new --network-name "$network_name" --network-cidr "$network_cidr" --external-endpoint "$external_endpoint" --listen-port "$listen_port" --yes
 }
 
 # Function to create subnet peers
@@ -38,10 +38,11 @@ function create_subnet_peers {
 
   # loop through subnet nodes
   for node in "${subnet_nodes[@]}"; do
-    peer_name="$subnet_name-$node"
+    peer_name="$subnet_name$node"
 
     # create peer and save config
     innernet-server add-peer "$network_name" --auto-ip --name "$node" --save-config "/opt/innernet/$peer_name.toml" --yes
+    wormhole send /opt/innernet/$peer_name.toml
   done
 }
 
@@ -52,10 +53,11 @@ function create_homenet_peers {
 
   # loop through homenet nodes
   for node in "${homenet_nodes[@]}"; do
-    peer_name="$homenet_name-$node"
+    peer_name="$homenet_name$node"
 
     # create peer and save config
     innernet-server add-peer "$network_name" --auto-ip --name "$node" --save-config "/opt/innernet/$peer_name.toml" --yes
+    wormhole send /opt/innernet/$peer_name.toml
   done
 }
 
