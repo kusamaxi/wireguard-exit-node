@@ -41,7 +41,7 @@ function create_subnet_peers {
     peer_name="$subnet_name-$node"
 
     # create peer and save config
-    innernet-server add-peer "$network_name" --auto-ip --name "$node" --save-config "$peer_name.toml" --yes
+    innernet-server add-peer "$network_name" --auto-ip --name "$node" --save-config "/opt/innernet/$peer_name.toml" --yes
   done
 }
 
@@ -55,7 +55,7 @@ function create_homenet_peers {
     peer_name="$homenet_name-$node"
 
     # create peer and save config
-    innernet-server add-peer "$network_name" --auto-ip --name "$node" --save-config "$peer_name.toml" --yes
+    innernet-server add-peer "$network_name" --auto-ip --name "$node" --save-config "/opt/innernet/$peer_name.toml" --yes
   done
 }
 
