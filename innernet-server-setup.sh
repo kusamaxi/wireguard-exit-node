@@ -1,12 +1,21 @@
 #!/bin/bash
 
-network_name="parent"
+network_name="rotko"
 network_cidr="10.42.0.0/16"
+
+# subnet
+subnet_name="xi"
+subnet_nodes=(01 02)
+subnet_cidr="10.42.1.0/24"
+
+# homenet
+homenet_name="pc"
+homenet_name=(01 02)
+homenet_cidr="10.42.1.0/24"
+
 external_endpoint=$(ip a | grep "inet " | awk '{print $2}' | cut -d '/' -f1):51820
 auto_external_endpoint=false
 listen_port=51820
-
-
 
 while [[ $# -gt 0 ]]
 do
@@ -63,7 +72,19 @@ echo ""
 echo "Press enter to continue, or ctrl-c to cancel"
 read _
 
+# create private network
 innernet-server new --network-name "$network_name" --network-cidr "$network_cidr" --external-endpoint "$external_endpoint" --listen-port "$listen_port"
-innernet-server add-cidr "$network_name"
-innernet-server add-peer "$network_name"
 
+# create subnet
+innernet-server add-cidr --name "$subnet_name" --cidr "$subnet_cidr" --yes "$network_name"
+# loop through subnet
+for node in "${subnet_nodes[@]}"; do
+  innernet-server add-peer "$network_name" --auto-ip --name "$node"
+done
+
+# create homenet
+innernet-server add-cidr --name "$homenet_name" --cidr "$homenet_cidr" --yes "$network_name"
+# loop through homenet
+for node in "${subnet_nodes[@]}"; do
+  innernet-server add-peer "$network_name" --auto-ip --name "$node"
+done
