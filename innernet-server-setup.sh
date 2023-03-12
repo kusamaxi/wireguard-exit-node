@@ -29,6 +29,7 @@ function create_network {
 
   # create private network
   innernet-server new --network-name "$network_name" --network-cidr "$network_cidr" --external-endpoint "$external_endpoint" --listen-port "$listen_port"
+  sudo systemctl enable --now innernet-server@"$network_name"
 }
 
 # Function to create subnet peers
