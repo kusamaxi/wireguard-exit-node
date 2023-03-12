@@ -3,7 +3,7 @@
 # Innernet network settings
 network_name="rotkonet"
 network_cidr="10.42.0.0/16"
-external_endpoint="127.0.0.1"
+external_endpoint="$(curl ifconfig.me):51820"
 listen_port=51820
 
 # Subnet settings
