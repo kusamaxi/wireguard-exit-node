@@ -64,4 +64,6 @@ echo "Press enter to continue, or ctrl-c to cancel"
 read _
 
 innernet-server new --network-name "$network_name" --network-cidr "$network_cidr" --external-endpoint "$external_endpoint" --listen-port "$listen_port"
+innernet-server add-cidr "$network_name"
+innernet-server add-peer "$network_name"
 
