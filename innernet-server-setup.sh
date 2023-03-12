@@ -1,6 +1,6 @@
 #!/bin/bash
 
-network_name="rotko"
+network_name="rotkonet"
 network_cidr="10.42.0.0/16"
 
 # subnet
