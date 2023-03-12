@@ -36,5 +36,5 @@ at clients
 `innernet --help`
 at server
 ```bash
-innernet-server --help
-sudo innernet-server new```
+./innernet-server-setup.sh [--network-name NETWORK_NAME] [--network-cidr NETWORK_CIDR] [--external-endpoint EXTERNAL_ENDPOINT] [--auto-external-endpoint] [--listen-port LISTEN_PORT]"
+```
