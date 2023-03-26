@@ -1,0 +1,39 @@
+
+table ip nat {
+    chain prerouting {
+        type nat hook prerouting priority dstnat;
+    }
+    chain postrouting {
+        type nat hook postrouting priority srcnat;
+    }
+}
+
+table ip filter {
+    chain input {
+        type filter hook input priority 0;
+    }
+    chain forward {
+        type filter hook forward priority 0;
+    }
+    chain output {
+        type filter hook output priority 0;
+    }
+}
+
+table ip filter {
+    chain forward {
+        ip protocol tcp ip dport 30333 iifname "enp4s0" oifname "rotko" accept
+        ip protocol tcp ip dport 30334 iifname "enp4s0" oifname "rotko" accept
+        ip protocol tcp ip dport 30335 iifname "enp4s0" oifname "rotko" accept
+        ip protocol tcp ip dport 20780 iifname "enp4s0" oifname "rotko" accept
+    }
+}
+
+table ip nat {
+    chain postrouting {
+        ip protocol tcp ip dport 30333 oifname "rotko" masquerade
+        ip protocol tcp ip dport 30334 oifname "rotko" masquerade
+        ip protocol tcp ip dport 30335 oifname "rotko" masquerade
+        ip protocol tcp ip dport 20780 oifname "rotko" masquerade
+    }
+}
