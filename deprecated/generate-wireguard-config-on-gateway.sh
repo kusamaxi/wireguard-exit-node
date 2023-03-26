@@ -31,6 +31,7 @@ EOF
 function generate_wireguard_config {
   local exit_private_key=$(wg genkey)
   local exit_public_key=$(echo "$exit_private_key" | wg pubkey)
+  wg pubkey < /etc/wireguard/gw00.key > /etc/wireguard/gw00.public
   cat << EOF > /etc/wireguard/gw00.conf
 [Interface]
 PrivateKey = $exit_private_key
