@@ -21,18 +21,30 @@ table ip filter {
 
 table ip nat {
     chain prerouting {
+        # xi01 ports
         ip protocol tcp ip dport 20711 dnat to 10.42.1.1:20780
         ip protocol tcp ip dport 31333 dnat to 10.42.1.1:30333
         ip protocol tcp ip dport 31334 dnat to 10.42.1.1:30334
         ip protocol tcp ip dport 31335 dnat to 10.42.1.1:30334
+        # xi02 ports
+        ip protocol tcp ip dport 20712 dnat to 10.42.1.2:20780
+        ip protocol tcp ip dport 32333 dnat to 10.42.1.2:30333
+        ip protocol tcp ip dport 32334 dnat to 10.42.1.2:30334
+        ip protocol tcp ip dport 32335 dnat to 10.42.1.2:30334
     }
 }
 
 table ip filter {
     chain forward {
-        ip protocol tcp ip dport 20780 iifname "eth0" oifname "rotko" accept 
-        ip protocol tcp ip dport 30333 iifname "eth0" oifname "rotko" accept 
-        ip protocol tcp ip dport 30334 iifname "eth0" oifname "rotko" accept 
-        ip protocol tcp ip dport 30335 iifname "eth0" oifname "rotko" accept 
+        # xi01
+        ip protocol tcp ip dport 20780 iifname "eth0" oifname "rotko" ip saddr 10.42.1.1 accept 
+        ip protocol tcp ip dport 30333 iifname "eth0" oifname "rotko" ip saddr 10.42.1.1 accept 
+        ip protocol tcp ip dport 30334 iifname "eth0" oifname "rotko" ip saddr 10.42.1.1 accept 
+        ip protocol tcp ip dport 30335 iifname "eth0" oifname "rotko" ip saddr 10.42.1.1 accept 
+        # xi02
+        ip protocol tcp ip dport 20780 iifname "eth0" oifname "rotko" ip saddr 10.42.1.2 accept 
+        ip protocol tcp ip dport 30333 iifname "eth0" oifname "rotko" ip saddr 10.42.1.2 accept 
+        ip protocol tcp ip dport 30334 iifname "eth0" oifname "rotko" ip saddr 10.42.1.2 accept 
+        ip protocol tcp ip dport 30335 iifname "eth0" oifname "rotko" ip saddr 10.42.1.2 accept 
     }
 }
